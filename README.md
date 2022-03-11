@@ -1,0 +1,1 @@
+# Solutions mind API

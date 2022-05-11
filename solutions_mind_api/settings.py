@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,7 @@ SECRET_KEY = 'django-insecure-5m9z3937juzb0i#%z3n&(f(3mvovxgbl6on!z)p6=knoycc(a1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'djoser',
     'account',
+    'question',
 ]
 
 MIDDLEWARE = [
@@ -103,9 +105,32 @@ WSGI_APPLICATION = 'solutions_mind_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME':os.path.join(BASE_DIR, 'solutionsdb.sqlite3'),
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'solutionsdb',
+#         'USER': 'solutiondbadmin',
+#         'PASSWORD': 'solutiondbpassword',
+#         'HOST': 'solutionsdb.c6he4dzz3wk9.ap-south-1.rds.amazonaws.com',
+#         'PORT': '3306',
+#     }
+# }
+
+# if 'RDS_HOSTNAME' in os.environ:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.mysql',
+#             'NAME': os.environ['solutionsdb'],
+#             'USER': os.environ['dbmasteruser'],
+#             'PASSWORD': os.environ['+a1yfU]p%O!,R-DZIY8~s^?=2Pl]3{`b'],
+#             'HOST': os.environ['ls-05b28e2cab200accfeeadc4c2c0ab0dec2752409.cv9rxifr2zvw.ap-south-1.rds.amazonaws.com'],
+#             'PORT': os.environ['3306'],
+#         }
+#     }
 
 
 # Password validation
@@ -143,6 +168,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
